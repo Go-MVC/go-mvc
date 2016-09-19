@@ -3,7 +3,6 @@ package bs_radix
 import (
 	"sort"
 	"strings"
-	"fmt"
 )
 
 
@@ -170,7 +169,6 @@ func (t *Tree) Insert(s string, v interface{}) (interface{}, bool) {
 					
 				},
 			}
-			fmt.Println("Prefix: ", search)
 			parent.addEdge(e)
 			t.size++
 			return nil, false
@@ -189,7 +187,6 @@ func (t *Tree) Insert(s string, v interface{}) (interface{}, bool) {
 			prefix: search[:commonPrefix],
 
 		}
-		fmt.Println("Prefix: ", search[:commonPrefix])
 		parent.replaceEdge(edge{
 			label: search[0],
 			node:  child,
@@ -201,8 +198,7 @@ func (t *Tree) Insert(s string, v interface{}) (interface{}, bool) {
 			node:  n,
 		})
 		n.prefix = n.prefix[commonPrefix:]
-		fmt.Println("Prefix: ", n.prefix[commonPrefix:])
-
+		
 		// Create a new leaf node
 		leaf := &leafNode{
 			key: s,
@@ -226,7 +222,6 @@ func (t *Tree) Insert(s string, v interface{}) (interface{}, bool) {
 			},
 			
 		})
-		fmt.Println("Prefix: ", search)
 		return nil, false
 	}
 }
