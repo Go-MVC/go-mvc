@@ -3,53 +3,40 @@ package main
 import (
     "fmt"
     "os"
-
     "github.com/urfave/cli"
+//    "github.com/docker/docker/api/types"
+//    "github.com/docker/docker/client"
 )
 
 func main() {
     app := cli.NewApp()
 
+    app.Name = "gwf"
+    app.Usage = "manage a Go web application"
+
+    /*
+    app.Action = func(c *cli.Context) error {
+        return nil
+    }
+    */
+
     app.Commands = []cli.Command{
         {
-            Name:    "add",
-            Aliases: []string{"a"},
-            Usage:   "add a task to the list",
+            Name:    "build",
+            Aliases: []string{"b"},
+            Usage:   "build a docker image",
             Action:  func(c *cli.Context) error {
-                fmt.Println("added task: ", c.Args().First())
+                fmt.Println("image built.")
                 return nil
             },
         },
         {
-            Name:    "complete",
-            Aliases: []string{"c"},
-            Usage:   "complete a task on the list",
+            Name:    "up",
+            Aliases: []string{"u"},
+            Usage:   "upload image to cloud",
             Action:  func(c *cli.Context) error {
-                fmt.Println("completed task: ", c.Args().First())
+                fmt.Println("...")
                 return nil
-            },
-        },
-        {
-            Name:        "template",
-            Aliases:     []string{"t"},
-            Usage:       "options for task templates",
-            Subcommands: []cli.Command{
-                {
-                    Name:  "add",
-                    Usage: "add a new template",
-                    Action: func(c *cli.Context) error {
-                        fmt.Println("new task template: ", c.Args().First())
-                        return nil
-                    },
-                },
-                {
-                    Name:  "remove",
-                    Usage: "remove an existing template",
-                    Action: func(c *cli.Context) error {
-                        fmt.Println("removed task template: ", c.Args().First())
-                        return nil
-                    },
-                },
             },
         },
     }
